@@ -1008,47 +1008,6 @@ button {
   font-size: 14px;
 }
 
-/* ---------- 视频 ---------- */
-.video-list {
-  display: grid;
-  gap: 34px;
-}
-
-.video-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.video-card h3::before {
-  content: "";
-  width: 22px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--accent);
-}
-
-.video-frame {
-  max-width: 860px;
-  margin: 0 auto;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border-strong);
-  background: #000;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-}
-
-.video-frame video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-}
-
 /* ---------- 联系 ---------- */
 .contact-grid {
   display: grid;
