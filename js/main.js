@@ -92,12 +92,40 @@
   var lightboxImg = document.getElementById("lightboxImg");
   var lightboxCaption = document.getElementById("lightboxCaption");
   var allItems = [];
+  var certItems = [];
   var currentIndex = -1;
 
+  function combinedItems() {
+    return allItems.concat(certItems);
+  }
+
+  function collectCertItems() {
+    certItems = Array.prototype.slice.call(document.querySelectorAll(".cert-item")).map(function (el) {
+      return {
+        file: el.getAttribute("data-file"),
+        title: el.getAttribute("data-title")
+      };
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".cert-item"), function (el, i) {
+      if (el._lbWired) return;
+      el._lbWired = true;
+      el.addEventListener("click", function () {
+        openLightbox(allItems.length + i);
+      });
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox(allItems.length + i);
+        }
+      });
+    });
+  }
+
   function openLightbox(index) {
-    if (index < 0 || index >= allItems.length) return;
+    var items = combinedItems();
+    if (index < 0 || index >= items.length) return;
     currentIndex = index;
-    var item = allItems[index];
+    var item = items[index];
     lightboxImg.src = item.file;
     lightboxImg.alt = item.title;
     lightboxCaption.textContent = item.title;
@@ -114,7 +142,8 @@
 
   function moveLightbox(step) {
     if (currentIndex < 0) return;
-    openLightbox((currentIndex + step + allItems.length) % allItems.length);
+    var items = combinedItems();
+    openLightbox((currentIndex + step + items.length) % items.length);
   }
 
   var lightboxClose = document.getElementById("lightboxClose");
@@ -213,6 +242,9 @@
         galleryRoot.innerHTML =
           '<p class="gallery-loading">作品图片加载失败，请刷新重试。</p>';
       }
+    })
+    .then(function () {
+      collectCertItems();
     });
 
   /* ---------- 页脚年份 ---------- */
