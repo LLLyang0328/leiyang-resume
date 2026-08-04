@@ -58,6 +58,20 @@ body {
 img {
   max-width: 100%;
   display: block;
+  background-color: var(--surface);
+}
+
+img.img-loaded {
+  animation: imgFadeIn 0.5s var(--ease) both;
+}
+
+@keyframes imgFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 a {

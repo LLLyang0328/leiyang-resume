@@ -245,6 +245,7 @@
     })
     .then(function () {
       collectCertItems();
+      markImgsLoaded();
     });
 
   /* ---------- 页脚年份 ---------- */
@@ -260,3 +261,18 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", updateProgress);
 })();
+
+/* 图片加载完成淡入，加载中显示占位底色 */
+function markImgsLoaded() {
+  document.querySelectorAll("img").forEach(function (img) {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add("img-loaded");
+    }
+  });
+}
+markImgsLoaded();
+document.addEventListener("load", function (e) {
+  if (e.target && e.target.tagName === "IMG") {
+    e.target.classList.add("img-loaded");
+  }
+}, true);
