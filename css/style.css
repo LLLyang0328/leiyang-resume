@@ -635,6 +635,17 @@ button {
   margin-bottom: 10px;
 }
 
+.edu-rank {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.edu-rank b {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .chip-list {
   display: flex;
   flex-wrap: wrap;
